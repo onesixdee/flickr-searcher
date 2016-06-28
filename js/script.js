@@ -16,17 +16,17 @@ angular
 
 
 		// declare a function to getImages that takes the variable tag as an argument
-		vm.getImages = function(){
+		vm.getImages = function(searchTag){
 			// 	declare a variable called searchtag to capture user's input
 			vm.searchTag = searchTag;
 
 			// declare a variable url to = endpoint : https://api.flickr.com/services/rest
-			vm.url = 'https://api.flickr.com/services/rest'
+			var url = 'https://api.flickr.com/services/rest'
 
 			// 	declare a request object that holds the query parameters
 			var request = {
 			    method: 'flickr.photos.search',
-			    api_key: '24baf8bbf88eb2cfebccf7d27808233f',
+			    api_key: "24baf8bbf88eb2cfebccf7d27808233f",
 			    tags: searchTag,
 			    format: 'json',
 			    nojsoncallback: 1
