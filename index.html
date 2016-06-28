@@ -22,10 +22,10 @@
 		<section class="container-section" ng-controller="SearchController as vm">
 			<div class="row">
 				<div class="col-xs-8">
-				<form name="vm.appForm" class="form-control" ng-submit="vm.getImages()" >
-					<input type="text" name="tag" 
+				<form name="vm.appForm" class="form-control" ng-submit="vm.getImages(vm.searchTag)" >
+					<input type="text" name="searchTag" 
 						placeholder="Enter a tag to search for" 
-						ng-model="vm.tag" required />
+						ng-model="vm.searchTag" required />
 				</form>
 				</div>
 				<div class="col-xs-4">
@@ -35,12 +35,12 @@
 
 			<div class="row">
 				<div class="col-xs-12" ng-if="vm.notify">
-					<p>Searching Instagram for photos tagged with "{{ vm.tag }}"</p>
+					<p>Searching Instagram for photos tagged with "{{ vm.seachTag }}"</p>
 				</div>
 			</div>
 			
 				<div ng-repeat="result in vm.results">
-          
+          			<div ng-src="https://farm{farm}.staticflickr.com/{server}/{id}_{secret}.jpg"> </div>
        			</div>
 		</section>
 
