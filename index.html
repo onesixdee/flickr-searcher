@@ -14,24 +14,36 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 </head>
 <body>
-	<div class="wrapper">
+	<div class="container">
 		<header>
 			<h1>Flickr Searcher</h1>
 		</header>
 
-		<section class="container" ng-controller="SearchController as search">
+		<section class="container-section" ng-controller="SearchController as vm">
 			<div class="row">
-				<div>
-					<form name="appForm">
-						<input type="text" name="tag" 
-							ng-model="search.tag" required />
-					</form>
+				<div class="col-xs-8">
+				<form name="vm.appForm" class="form-control" ng-submit="vm.getImages()" >
+					<input type="text" name="tag" 
+						placeholder="Enter a tag to search for" 
+						ng-model="vm.tag" required />
+				</form>
 				</div>
-				<div>
-					<button type="submit"></button>
+				<div class="col-xs-4">
+					<button class="btn btn-default" type="submit">Submit</button>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-xs-12" ng-if="vm.notify">
+					<p>Searching Instagram for photos tagged with "{{ vm.tag }}"</p>
+				</div>
+			</div>
+			
+				<div ng-repeat="result in vm.results">
+          
+       			</div>
 		</section>
+
 	</div> <!-- wrapper -->
 	<script src="js/script.js" type="text/javascript"></script>
 </body>
