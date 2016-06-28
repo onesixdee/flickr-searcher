@@ -8,11 +8,11 @@ angular
 	})
 	// initialize controller called SearchController 
 	// that takes two parameters of $http and $sce
-	.controller('SearchController', function('$http', '$sce'){ 
+	.controller('SearchController', function($http, $sce){ 
 
 // 		declare a variable controller syntax as vm to = this
 
-// 		declare a function to searchImages that takes the variable tag as an argument
+// 		declare a function to getImages that takes the variable tag as an argument
 		
 // 			declare a variable called tag to capture user's input
 // 			declare a variable url to = endpoint : https://api.flickr.com/services/rest
