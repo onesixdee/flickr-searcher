@@ -1,6 +1,6 @@
 angular
 	// initialize app module called FlickrApp
-	.module('FlickrApp', ['ngAnimate'])
+	.module('FlickrApp', ['ngMessages', 'ngAnimate'])
 	// 	initialize config to make CORS Request
 	// 	configure defaults on the $httpProvider object
 	.config(["$httpProvider", function($httpProvider){
@@ -19,6 +19,7 @@ angular
 
 		// declare a function to getImages that takes the variable searchtag as an argument
 		vm.getImages = function(searchTag){
+			
 			// declare a variable called searchtag to capture user's input
 			vm.searchTag = searchTag;
 			// declare a variable url that takes in the REST Endpoint URL

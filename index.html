@@ -13,6 +13,7 @@
 	<!-- Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.7/angular-animate.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -23,10 +24,15 @@
 		<section class="container-section" ng-controller="SearchController as vm">
 			<div class="row">
 				<div class="col-xs-8">
-				<form name="vm.appForm" class="form-control" ng-submit="vm.getImages(vm.searchTag)" >
+				<form name="vm.appForm" ng-submit="vm.appForm.$valid && vm.getImages(vm.searchTag)" >
 					<input type="text" name="searchTag" 
-						placeholder="Search" 
-						ng-model="vm.searchTag" required />
+						ng-model="vm.searchTag"
+						class="form-control ng-pristine ng-invalid"
+						placeholder="Search" required />
+					<div ng-if="vm.appForm.$submitted" ng-messages="vm.appForm.searchTag.$error" role="alert">
+					<p ng-class="{error:vm.appForm.$invalid}"  ng-message="required">Please fill out this field.</p>
+				</div>
+
 				</div>
 				<div class="col-xs-4">
 					<button class="btn btn-default" type="submit">Submit</button>
@@ -34,14 +40,13 @@
 				</form>
 			</div>
 
-
 			<div class="row">
 				<div class="col-xs-12" ng-if="vm.results">
-					<h2>We found {{ vm.results.length }} results for {{ vm.searchTag }}</h2>
+					<h2>We found {{ vm.results.length }} results for "{{ vm.searchTag }}"</h2>
 				</div>
 			</div>
 			<div class="row">
-				<div ng-repeat="result in vm.results">
+				<div class="animate" ng-repeat="result in vm.results">
 					<div class="col-xs-4">
 	          			<img ng-src="https://farm{{result.farm}}.staticflickr.com/{{result.server}}/{{result.id}}_{{result.secret}}.jpg" width="350" height="350">
 	       			</div>
