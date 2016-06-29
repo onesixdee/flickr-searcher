@@ -24,24 +24,28 @@
 				<div class="col-xs-8">
 				<form name="vm.appForm" class="form-control" ng-submit="vm.getImages(vm.searchTag)" >
 					<input type="text" name="searchTag" 
-						placeholder="Enter a tag to search for" 
+						placeholder="Search" 
 						ng-model="vm.searchTag" required />
-				</form>
 				</div>
 				<div class="col-xs-4">
 					<button class="btn btn-default" type="submit">Submit</button>
 				</div>
+				</form>
 			</div>
 
+
 			<div class="row">
-				<div class="col-xs-12" ng-if="vm.notify">
-					<p>Searching Instagram for photos tagged with "{{ vm.seachTag }}"</p>
+				<div class="col-xs-12" ng-if="vm.results">
+					<h2>We found {{ vm.results.length }} results for {{ vm.searchTag }}</h2>
 				</div>
 			</div>
-			
+			<div class="row">
 				<div ng-repeat="result in vm.results">
-          			<div ng-src="https://farm{farm}.staticflickr.com/{server}/{id}_{secret}.jpg"> </div>
+					<div class="col-xs-4">
+	          			<img ng-src="https://farm{{result.farm}}.staticflickr.com/{{result.server}}/{{result.id}}_{{result.secret}}.jpg" width="350" height="350">
+	       			</div>
        			</div>
+       		</div>
 		</section>
 
 	</div> <!-- wrapper -->
