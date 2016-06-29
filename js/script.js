@@ -3,53 +3,69 @@ angular
 	.module('FlickrApp', [])
 	// 	initialize config to make CORS Request
 	// 	configure defaults on the $httpProvider object
-	.config(function($httpProvider){
+	.config(["$httpProvider", function($httpProvider){
 		$httpProvider.defaults.useXDomain = true;
-	})
+	}])
 	// initialize controller called SearchController 
-	// that takes two parameters of $http and $sce
-	.controller('SearchController', function($http, $sce){ 
-
+	// that takes parameters of $http $sce, and $q
+	//setting parameters in array for minifying purposes
+	.controller('SearchController', ["$http", "$sce", "$q", function($http, $sce, $q){ 
 		// declare a variable controller syntax as vm to = this
 		var vm = this;
+		// tells Angular that the URLs are safe
+		// vm.trustSrc = function(src) {
+		//   return $sce.trustAsResourceUrl(src);
+		// }
 
-
-
-		// declare a function to getImages that takes the variable tag as an argument
+		// declare a function to getImages that takes the variable searchtag as an argument
 		vm.getImages = function(searchTag){
-			// 	declare a variable called searchtag to capture user's input
+			// declare a variable called searchtag to capture user's input
 			vm.searchTag = searchTag;
-
-			// declare a variable url to = endpoint : https://api.flickr.com/services/rest
+			// declare a variable url that takes in the REST Endpoint URL
 			var url = 'https://api.flickr.com/services/rest'
-
-			// 	declare a request object that holds the query parameters
+			var api_key = '24baf8bbf88eb2cfebccf7d27808233f'
+			//declare a request object that holds the query parameters
 			var request = {
+				//api method to search for photos
 			    method: 'flickr.photos.search',
-			    api_key: "24baf8bbf88eb2cfebccf7d27808233f",
+			    api_key: api_key,
 			    tags: searchTag,
 			    format: 'json',
 			    nojsoncallback: 1
 			}
+			//
+			vm.getFlickrAPI(url, request).then(function(data){
+					console.log(arguments)
+					vm.results = data;
+				}, 
+				function(error){
+					console.log(arguments, 'error')
+				}
+			)
+		}
 
-			// initialize the GET Request
+		vm.getFlickrAPI = function(url, request){
+			// initialize a defer object
+			var defer = $q.defer()
+			//$http service to request to read the flickr database
 			$http({
 				method: 'GET',
 				url: url,
 				params: request
 			})
 			// declare a then method that takes in a response
-			// the data key: response.data.photos.photo
 			.then(function(response){
-				vm.results = response.data.photos.photo;
+				//if request is successful, promise will respond with the photos object
+				defer.resolve(response.data.photos.photo)
 			},
 			function(response){
-				alert('error')
+				//if request is unsuccessful, promise wil reject the request
+				defer.reject(response)
 			})
+			//promise will display the photos if request was successful
+			return defer.promise
 		}
 
-	})
-
-
+	}])
 
 
