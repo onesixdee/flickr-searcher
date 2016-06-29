@@ -1,6 +1,6 @@
 angular
 	// initialize app module called FlickrApp
-	.module('FlickrApp', [])
+	.module('FlickrApp', ['ngAnimate'])
 	// 	initialize config to make CORS Request
 	// 	configure defaults on the $httpProvider object
 	.config(["$httpProvider", function($httpProvider){
