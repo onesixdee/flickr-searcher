@@ -19,6 +19,7 @@
 
 h1 {
      text-align: center;
+     margin: 20px;
 }
 
 img {
@@ -29,15 +30,19 @@ form {
     margin-bottom: 20px;
 }
 .animate {
-    opacity: 1;
+  opacity: 1;
 }
+
 .animate.ng-enter,
-.animate.ng-leave,.ng-leave-active {
-    transition: all ease-in 1s;
+.animate.ng-leave-active{
+    -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
 }
 
 .animate.ng-leave,
-.animate.ng-enter-active {
+.animate.ng-enter-active{
   line-height: 0;
   opacity: 0;
   padding: 0 20px;
