@@ -43,6 +43,9 @@ angular
 					console.log(arguments, 'error')
 				}
 			)
+			
+			// Set back to pristine.
+			vm.appForm.$setPristine();
 		}
 
 		vm.getFlickrAPI = function(url, request){
